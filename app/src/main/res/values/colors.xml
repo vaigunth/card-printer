@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#493175</color>
+    <color name="colorPrimaryDark">#493175</color>
+    <color name="colorAccent">#FECD4C</color>
+    <color name="printerKnobColor">#EB3B8C</color>
+</resources>

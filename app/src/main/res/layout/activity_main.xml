@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#493175"
+    tools:context="com.vaigunth.pulldowntorefresh.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-6dp"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/progress_left"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:scaleX="-1" />
+
+        <ProgressBar
+            android:id="@+id/progress_right"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/printer_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/printer"
+        android:translationY="-100dp" />
+
+    <LinearLayout
+        android:id="@+id/printer_light"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/printer_light_1"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        android:translationX="50dp"
+        android:translationY="-100dp" />
+
+    <RelativeLayout
+        android:layout_width="72dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:clipChildren="true">
+
+        <ImageView
+            android:id="@+id/printer_card_image_view"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/printer_card"
+            android:translationY="-40dp" />
+
+        <LinearLayout
+            android:id="@+id/printer_knob"
+            android:layout_width="12dp"
+            android:layout_height="6dp"
+            android:background="@drawable/printer_knob"
+            android:elevation="10dp"
+            android:orientation="horizontal"
+            android:translationY="-100dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:overScrollMode="never"
+        app:stackFromEnd="true" />
+</RelativeLayout>

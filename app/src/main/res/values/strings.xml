@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PullDownToRefresh</string>
+    <string name="reset">Reset</string>
+</resources>
