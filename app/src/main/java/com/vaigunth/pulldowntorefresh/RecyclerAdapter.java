@@ -24,7 +24,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     List<Boolean> mDataList = new ArrayList<>();
     private Animation mFlipAnimation;
-    private Activity activity;
+    private Activity mActivity;
     private int mParentHeight;
     private int mChildHeight;
     private int mChildHeightScaleFactor;
@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
 
         this.mDataList = mDataList;
-        this.activity = activity;
+        this.mActivity = activity;
     }
 
     @Override
@@ -60,9 +60,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        if (i == 0 && ((MainActivity) activity).mShouldAnimateCard) {
+        if (i == 0 && ((MainActivity) mActivity).mShouldAnimateCard) {
             //Animate on new card
-            ((MainActivity) activity).mShouldAnimateCard = false;
+            ((MainActivity) mActivity).mShouldAnimateCard = false;
             mParent = (FrameLayout) viewHolder.itemView;
             mParent.clearAnimation();
             mCardFront = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_back, mParent, false);
@@ -118,8 +118,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onAnimationEnd(Animation animation) {
                 mCardFront.clearAnimation();
                 mCardBack.clearAnimation();
-                ((MainActivity) activity).mIsRefreshing = false;
-                ((MainActivity) activity).resetProgress();
+                ((MainActivity) mActivity).mIsRefreshing = false;
+                ((MainActivity) mActivity).resetProgress();
                 mCardFront.setVisibility(View.INVISIBLE);
             }
 
@@ -163,7 +163,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         Runnable animate = new Runnable() {
             @Override
             public void run() {
-                if (!((MainActivity) activity).mStopRefresh) {
+                if (!((MainActivity) mActivity).mStopRefresh) {
                     mCardBack.setVisibility(View.INVISIBLE);
                     mCardFront.setVisibility(View.VISIBLE);
                     ObjectAnimator frontScaleX = ObjectAnimator.ofFloat(mCardFront, "scaleX", mChildWidthScaleFactor);
@@ -179,7 +179,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     scaleAnim.setInterpolator(new AccelerateDecelerateInterpolator());
                     scaleAnim.start();
                 } else {
-                    ((MainActivity) activity).mStopRefresh = false;
+                    ((MainActivity) mActivity).mStopRefresh = false;
                 }
 
             }
