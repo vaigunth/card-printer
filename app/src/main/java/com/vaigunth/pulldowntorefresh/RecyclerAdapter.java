@@ -65,14 +65,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             ((MainActivity) mActivity).mShouldAnimateCard = false;
             mParent = (FrameLayout) viewHolder.itemView;
             mParent.clearAnimation();
-            mCardFront = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_back, mParent, false);
-            mCardBack = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_front, mParent, false);
+            mCardFront = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_front, mParent, false);
+            mCardBack = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_back, mParent, false);
             animateInsertion(viewHolder, i);
         } else {
             //Don't animate existing cards
             mParent = (FrameLayout) viewHolder.itemView;
             mParent.clearAnimation();
-            mCardBack = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_front, mParent, false);
+            mCardBack = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_back, mParent, false);
             mParent.addView(mCardBack);
         }
     }
