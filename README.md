@@ -6,7 +6,7 @@ https://dribbble.com/shots/3031884-Pull-to-Refresh-Printer
 
 ![Card printer demo](demo.gif?raw=true "Card Printer Demo")
 
-Checking the condition for refresh inside the ```java onTouchListener```:
+Checking the condition for refresh inside the ```onTouchListener```:
 
 ```java
 if (mLinearLayoutManager.findFirstCompletelyVisibleItemPosition() <= 0
