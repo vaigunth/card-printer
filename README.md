@@ -4,6 +4,10 @@
 
 https://dribbble.com/shots/3031884-Pull-to-Refresh-Printer
 
+Download .apk file at:
+
+https://www.dropbox.com/s/bm7ja5cwt2dtsgx/refresh.apk?dl=0
+
 ![Card printer demo](demo.gif?raw=true "Card Printer Demo")
 
 Checking the condition for refresh inside the ```onTouchListener```:
