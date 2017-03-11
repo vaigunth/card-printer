@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +39,6 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
             throw new IllegalArgumentException("Data cannot be null !");
         }
 
-        Log.d("LIB", "RA constructor");
         this.mDataList = mDataList;
         this.mPrinterRecyclerView = recyclerView;
     }

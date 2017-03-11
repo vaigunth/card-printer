@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*
-    * Restarts the activity
-    * */
+    /**
+     * Restarts the activity
+     */
     public void reset() {
         Intent intent = getIntent();
         finish();
