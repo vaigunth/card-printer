@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,10 @@ import android.widget.FrameLayout;
 import java.util.List;
 
 
-public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    List<Object> mDataList;
+    private List<Object> mDataList;
     private Animation mFlipAnimation;
     private PrinterRecyclerView mPrinterRecyclerView;
     private int mParentHeight;
@@ -35,7 +34,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
     private View mCardBack;
     private Animator.AnimatorListener mAnimationListener;
 
-    public RecyclerAdapter(List mDataList, PrinterRecyclerView recyclerView) {
+    public PrinterRecyclerAdapter(List mDataList, PrinterRecyclerView recyclerView) {
 
         if (mDataList == null) {
             throw new IllegalArgumentException("Data cannot be null !");
@@ -68,9 +67,9 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     public void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i) {
-        if (i == 0 && mPrinterRecyclerView.mShouldAnimateCard) {
+        if (i == 0 && mPrinterRecyclerView.shouldAnimateCard()) {
             //Animate on new card
-            mPrinterRecyclerView.mShouldAnimateCard = false;
+            mPrinterRecyclerView.setShouldAnimateCard(false);
             mParent = (FrameLayout) viewHolder.itemView;
             mParent.clearAnimation();
             mCardFront = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_front, mParent, false);
@@ -86,9 +85,9 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     public void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i, int cardFrontLayoutId, int cardBackLayoutId) {
-        if (i == 0 && mPrinterRecyclerView.mShouldAnimateCard) {
+        if (i == 0 && mPrinterRecyclerView.shouldAnimateCard()) {
             //Animate on new card
-            mPrinterRecyclerView.mShouldAnimateCard = false;
+            mPrinterRecyclerView.setShouldAnimateCard(false);
             mParent = (FrameLayout) viewHolder.itemView;
             mParent.clearAnimation();
             mCardFront = LayoutInflater.from(mParent.getContext()).inflate(cardFrontLayoutId, mParent, false);
@@ -144,7 +143,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
             public void onAnimationEnd(Animation animation) {
                 mCardFront.clearAnimation();
                 mCardBack.clearAnimation();
-                mPrinterRecyclerView.mIsRefreshing = false;
+                mPrinterRecyclerView.setIsRefreshing(false);
                 mPrinterRecyclerView.resetProgress();
                 mCardFront.setVisibility(View.INVISIBLE);
             }
@@ -189,7 +188,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
         Runnable animate = new Runnable() {
             @Override
             public void run() {
-                if (!mPrinterRecyclerView.mStopRefresh) {
+                if (!mPrinterRecyclerView.shouldStopRefresh()) {
                     mCardBack.setVisibility(View.INVISIBLE);
                     mCardFront.setVisibility(View.VISIBLE);
                     ObjectAnimator frontScaleX = ObjectAnimator.ofFloat(mCardFront, "scaleX", mChildWidthScaleFactor);
@@ -205,7 +204,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
                     scaleAnim.setInterpolator(new AccelerateDecelerateInterpolator());
                     scaleAnim.start();
                 } else {
-                    mPrinterRecyclerView.mStopRefresh = false;
+                    mPrinterRecyclerView.setStopRefresh(false);
                 }
 
             }
