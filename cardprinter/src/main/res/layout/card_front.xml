@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.vaigunth.cardprinter.PrinterView"
+    android:id="@+id/card_back"
+    android:layout_width="72dp"
+    android:layout_height="48dp"
+    android:layout_gravity="top|center_horizontal"
+    android:layout_marginTop="8dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitStart"
+        android:src="@drawable/printer_card" />
+</android.support.v7.widget.CardView>
