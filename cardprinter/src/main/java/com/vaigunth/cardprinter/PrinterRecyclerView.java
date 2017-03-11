@@ -32,11 +32,10 @@ public class PrinterRecyclerView extends RelativeLayout {
 
     static float PULL_DOWN_THRESHOLD;
 
-    RecyclerView mRecyclerView;
-    boolean mIsRefreshing;
-    boolean mCanRefresh;
-    boolean mShouldAnimateCard;
-    boolean mStopRefresh;
+    private RecyclerView mRecyclerView;
+    private boolean mIsRefreshing;
+    private boolean mShouldAnimateCard;
+    private boolean mStopRefresh;
     private LinearLayoutManager mLinearLayoutManager;
     private RecyclerView.Adapter mRecyclerAdapter;
     private float mPreviousY;
@@ -45,7 +44,6 @@ public class PrinterRecyclerView extends RelativeLayout {
     private ProgressBar mProgressBarLeft;
     private ProgressBar mProgressBarRight;
     private int mProgressCount;
-    private int mPreviousProgress;
     private Runnable mProgressUpdater;
     private boolean mProgressIncreasing;
     private ImageView mPrinter;
@@ -55,7 +53,6 @@ public class PrinterRecyclerView extends RelativeLayout {
     private boolean mYellowLight;
     private Runnable mTogglePrinterLight;
     private float mChangeInY;
-    private int mPrinterCardImageId;
 
 
     public PrinterRecyclerView(Context context, AttributeSet attrs) {
@@ -77,9 +74,8 @@ public class PrinterRecyclerView extends RelativeLayout {
         mPrinterKnob = (LinearLayout) rootView.findViewById(R.id.printer_knob);
         mPrinterLight = (LinearLayout) rootView.findViewById(R.id.printer_light);
         mYellowLight = true;
-        mCanRefresh = true;
         mShouldAnimateCard = false;
-        mPreviousProgress = mProgressCount = 0;
+        mProgressCount = 0;
         mStopRefresh = false;
 
         mProgressBarLeft = (ProgressBar) rootView.findViewById(R.id.progress_left);
@@ -177,7 +173,7 @@ public class PrinterRecyclerView extends RelativeLayout {
         };
         mRecyclerView.setItemAnimator(itemAnimator);
 
-        /*mRecyclerAdapter = new RecyclerAdapter(mCardsList, this);
+        /*mRecyclerAdapter = new PrinterRecyclerAdapter(mCardsList, this);
         mRecyclerView.setAdapter(mRecyclerAdapter);*/
 
        /* mLinearLayoutManager = new LinearLayoutManager(getContext()) {
@@ -520,9 +516,9 @@ public class PrinterRecyclerView extends RelativeLayout {
         return mRecyclerAdapter;
     }
 
-    public void setAdapter(RecyclerAdapter recyclerAdapter) {
-        mRecyclerAdapter = recyclerAdapter;
-        mCardsList = recyclerAdapter.getDataSet();
+    public void setAdapter(PrinterRecyclerAdapter printerRecyclerAdapter) {
+        mRecyclerAdapter = printerRecyclerAdapter;
+        mCardsList = printerRecyclerAdapter.getDataSet();
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 
@@ -537,5 +533,25 @@ public class PrinterRecyclerView extends RelativeLayout {
     public void setLayoutManager(LinearLayoutManager layoutManager) {
         mLinearLayoutManager = layoutManager;
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
+    }
+
+    public boolean shouldAnimateCard() {
+        return mShouldAnimateCard;
+    }
+
+    public void setShouldAnimateCard(boolean shouldAnimateCard) {
+        this.mShouldAnimateCard = shouldAnimateCard;
+    }
+
+    public boolean shouldStopRefresh() {
+        return mStopRefresh;
+    }
+
+    public void setStopRefresh(boolean stopRefresh) {
+        this.mStopRefresh = stopRefresh;
+    }
+
+    public void setIsRefreshing(boolean isRefreshing) {
+        this.mIsRefreshing = isRefreshing;
     }
 }

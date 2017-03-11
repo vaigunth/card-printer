@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vaigunth.cardprinter.PrinterRecyclerAdapter;
 import com.vaigunth.cardprinter.PrinterRecyclerView;
-import com.vaigunth.cardprinter.RecyclerAdapter;
 
 import java.util.List;
 
@@ -15,10 +15,9 @@ import java.util.List;
  * Created by Vaigunth on 30-Oct-16.
  */
 
-public class MyRecyclerAdapter extends RecyclerAdapter {
+public class MyRecyclerAdapter extends PrinterRecyclerAdapter {
     MyRecyclerAdapter(List mDataList, PrinterRecyclerView recyclerView) {
         super(mDataList, recyclerView);
-        Log.d("LIB", "MRA constructor");
     }
 
     @Override
