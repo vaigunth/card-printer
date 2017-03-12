@@ -191,10 +191,8 @@ public class PrinterRecyclerView extends RelativeLayout {
                         handler.postDelayed(mProgressUpdater, 5);
                     } else {
                         mProgressCount = 0;
-                        if (!mIsRefreshing) {
-                            mProgressBarLeft.setVisibility(GONE);
-                            mProgressBarRight.setVisibility(GONE);
-                        }
+                        mProgressBarLeft.setVisibility(GONE);
+                        mProgressBarRight.setVisibility(GONE);
                     }
                 }
             }

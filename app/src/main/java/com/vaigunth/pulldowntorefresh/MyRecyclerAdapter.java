@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Vaigunth on 30-Oct-16.
  */
 
-public class MyRecyclerAdapter extends PrinterRecyclerAdapter {
+class MyRecyclerAdapter extends PrinterRecyclerAdapter {
     MyRecyclerAdapter(List<Object> mDataList, PrinterRecyclerView recyclerView) {
         super(mDataList, recyclerView);
     }
@@ -34,7 +34,7 @@ public class MyRecyclerAdapter extends PrinterRecyclerAdapter {
         //Use getCardFrontLayout() and getCardBackLayout() to manipulate the views
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         MyViewHolder(final View itemView) {
             super(itemView);
         }

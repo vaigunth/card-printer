@@ -72,7 +72,7 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
             mParent.clearAnimation();
             mCardFront = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_front, mParent, false);
             mCardBack = LayoutInflater.from(mParent.getContext()).inflate(R.layout.card_back, mParent, false);
-            animateInsertion(viewHolder, i);
+            animateInsertion(viewHolder);
         } else {
             //Don't animate existing cards
             mParent = (FrameLayout) viewHolder.itemView;
@@ -90,7 +90,7 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
             mParent.clearAnimation();
             mCardFront = LayoutInflater.from(mParent.getContext()).inflate(cardFrontLayoutId, mParent, false);
             mCardBack = LayoutInflater.from(mParent.getContext()).inflate(cardBackLayoutId, mParent, false);
-            animateInsertion(viewHolder, i);
+            animateInsertion(viewHolder);
         } else {
             //Don't animate existing cards
             mParent = (FrameLayout) viewHolder.itemView;
@@ -103,7 +103,7 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
     /*
     * Flips the card out of the printer into the recycler view
     * */
-    private void animateInsertion(final RecyclerView.ViewHolder viewHolder, final int i) {
+    private void animateInsertion(final RecyclerView.ViewHolder viewHolder) {
         mParent.addView(mCardFront);
         mParent.addView(mCardBack);
 
