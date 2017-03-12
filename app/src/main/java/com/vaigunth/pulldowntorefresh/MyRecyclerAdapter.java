@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.vaigunth.cardprinter.PrinterRecyclerAdapter;
 import com.vaigunth.cardprinter.PrinterRecyclerView;
@@ -16,32 +18,23 @@ import java.util.List;
  */
 
 public class MyRecyclerAdapter extends PrinterRecyclerAdapter {
-    MyRecyclerAdapter(List mDataList, PrinterRecyclerView recyclerView) {
+    MyRecyclerAdapter(List<Object> mDataList, PrinterRecyclerView recyclerView) {
         super(mDataList, recyclerView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return super.getItemCount();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
-        MyViewHolder viewHolder = new MyViewHolder(v);
-        return viewHolder;
+        return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         initCardAnimation(viewHolder, i, R.layout.card_front, R.layout.card_back);
-        MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
-        /*myViewHolder.imageView = (ImageView) ((MyViewHolder) viewHolder).itemView.findViewById(R.id.img_view);
-        myViewHolder.imageView.setImageResource(R.drawable.b);*/
+        //Use getCardFrontLayout() and getCardBackLayout() to manipulate the views
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        //ImageView imageView;
         MyViewHolder(final View itemView) {
             super(itemView);
         }

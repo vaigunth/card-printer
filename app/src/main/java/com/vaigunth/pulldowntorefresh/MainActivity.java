@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.vaigunth.cardprinter.PrinterRecyclerView;
 
@@ -19,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Object> arrayList = new ArrayList<>();
         PrinterRecyclerView printerRecyclerView = (PrinterRecyclerView) findViewById(R.id.prv);
-        printerRecyclerView.setPrinterCardImage(R.drawable.printer_card);
+        ImageView printerCard = new ImageView(this);
+        printerCard.setImageResource(R.drawable.printer_card);
+        printerRecyclerView.setPrinterCardImageView(printerCard);
         printerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         printerRecyclerView.setAdapter(new MyRecyclerAdapter(arrayList, printerRecyclerView));
-
     }
 
 

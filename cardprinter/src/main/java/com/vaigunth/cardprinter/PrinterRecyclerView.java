@@ -3,6 +3,7 @@ package com.vaigunth.cardprinter;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class PrinterRecyclerView extends RelativeLayout {
 
-    static float PULL_DOWN_THRESHOLD;
+    private static float PULL_DOWN_THRESHOLD;
 
     private RecyclerView mRecyclerView;
     private boolean mIsRefreshing;
@@ -40,7 +41,7 @@ public class PrinterRecyclerView extends RelativeLayout {
     private RecyclerView.Adapter mRecyclerAdapter;
     private float mPreviousY;
     private float mDeltaY;
-    private List mCardsList;
+    private List<Object> mCardsList;
     private ProgressBar mProgressBarLeft;
     private ProgressBar mProgressBarRight;
     private int mProgressCount;
@@ -67,7 +68,6 @@ public class PrinterRecyclerView extends RelativeLayout {
 
 
     private void initialize(Context context) {
-        //inflate(context, R.layout.printer_recycler_view, this);
         View rootView = inflate(context, R.layout.printer_recycler_view, null);
         mPrinter = (ImageView) rootView.findViewById(R.id.printer_image_view);
         mPrinterCard = (ImageView) rootView.findViewById(R.id.printer_card_image_view);
@@ -172,18 +172,6 @@ public class PrinterRecyclerView extends RelativeLayout {
             }
         };
         mRecyclerView.setItemAnimator(itemAnimator);
-
-        /*mRecyclerAdapter = new PrinterRecyclerAdapter(mCardsList, this);
-        mRecyclerView.setAdapter(mRecyclerAdapter);*/
-
-       /* mLinearLayoutManager = new LinearLayoutManager(getContext()) {
-            @Override
-            public boolean supportsPredictiveItemAnimations() {
-                return true;
-            }
-        };
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);*/
-
         mProgressCount = 0;
 
         //Reset progress bar by gradually decreasing the value
@@ -508,8 +496,7 @@ public class PrinterRecyclerView extends RelativeLayout {
     * Converts a dp value into corresponding value in pixels
     * */
     private float dpToPx(int dp) {
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
-        return px;
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 
     public RecyclerView.Adapter getAdapter() {
@@ -522,8 +509,13 @@ public class PrinterRecyclerView extends RelativeLayout {
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 
-    public void setPrinterCardImage(int imageId) {
-        mPrinterCard.setImageResource(imageId);
+    public void setPrinterCardImageView(ImageView imageView) {
+        mPrinterCard.setImageDrawable(imageView.getDrawable());
+
+    }
+
+    Drawable getPrinterCardDrawable() {
+        return mPrinterCard.getDrawable();
     }
 
     public RecyclerView.LayoutManager getLayoutManager() {

@@ -34,17 +34,17 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
     private View mCardBack;
     private Animator.AnimatorListener mAnimationListener;
 
-    public PrinterRecyclerAdapter(List mDataList, PrinterRecyclerView recyclerView) {
+    public PrinterRecyclerAdapter(List<Object> mDataList, PrinterRecyclerView recyclerView) {
 
         if (mDataList == null) {
-            throw new IllegalArgumentException("Data cannot be null !");
+            throw new IllegalArgumentException("Data cannot be null!");
         }
 
         this.mDataList = mDataList;
         this.mPrinterRecyclerView = recyclerView;
     }
 
-    public List getDataSet() {
+    List<Object> getDataSet() {
         return mDataList;
     }
 
@@ -55,10 +55,8 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        /*View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;*/
-        return null;
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -66,7 +64,7 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
         initCardAnimation(viewHolder, i);
     }
 
-    public void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i) {
+    private void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i) {
         if (i == 0 && mPrinterRecyclerView.shouldAnimateCard()) {
             //Animate on new card
             mPrinterRecyclerView.setShouldAnimateCard(false);
@@ -84,7 +82,7 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
         }
     }
 
-    public void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i, int cardFrontLayoutId, int cardBackLayoutId) {
+    protected void initCardAnimation(RecyclerView.ViewHolder viewHolder, int i, int cardFrontLayoutId, int cardBackLayoutId) {
         if (i == 0 && mPrinterRecyclerView.shouldAnimateCard()) {
             //Animate on new card
             mPrinterRecyclerView.setShouldAnimateCard(false);
@@ -213,12 +211,18 @@ public abstract class PrinterRecyclerAdapter extends RecyclerView.Adapter<Recycl
         handler.postDelayed(animate, 1050);
     }
 
+    public View getCardFrontLayout() {
+        return mCardFront;
+    }
 
-    public static abstract class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(final View itemView) {
+    public View getCardBackLayout() {
+        return mCardBack;
+    }
+
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+        ViewHolder(final View itemView) {
             super(itemView);
         }
     }
-
 
 }
